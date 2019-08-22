@@ -20,6 +20,7 @@
 
 .scroll-y {
   height: 100%;
+  position: absolute;
   overflow-y: auto;
   @include scroll();
 }
