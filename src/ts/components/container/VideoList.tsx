@@ -25,12 +25,12 @@ class VideoList extends React.Component<IListProps> {
         <Row>
         {
           store.searchVideos.map((video) => (
-            <Col xs={12} className="mb-2">
+            <Col xs={12} className="mb-2" key={video.id}>
               <Row className="justify-content-center">
                 <VideoPreviewCard
-                  img={video.snippet.thumbnails.medium.url}
-                  title={video.snippet.title}
-                  description={video.snippet.description}
+                  img={video.img}
+                  title={video.title}
+                  description={video.description}
                 />
               </Row>
             </Col>

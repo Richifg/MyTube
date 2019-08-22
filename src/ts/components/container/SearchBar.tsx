@@ -10,9 +10,10 @@ import {
 } from 'reactstrap';
 
 import { debounce } from '../../utils';
+import YouTubeStore from '../../stores/YoutubeStore';
 
 interface ISearch {
-  search: (query: string) => void;
+  store: YouTubeStore;
 }
 
 @observer
@@ -23,12 +24,12 @@ class SearchBar extends React.Component<ISearch> {
   constructor(props: any) {
     super(props);
     this.query = '';
-    this.debouncedSearch = debounce(this.props.search, 500);
+    this.debouncedSearch = debounce(this.props.store.search, 1000);
   }
 
   updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.query = e.target.value;
-    this.debouncedSearch(this.query);
+    this.props.store.query = e.target.value;
+    this.debouncedSearch();
   }
 
   render() {
@@ -36,7 +37,7 @@ class SearchBar extends React.Component<ISearch> {
       <InputGroup className="search-bar">
         <Input placeholder="Search" onChange={this.updateQuery}/>
         <InputGroupAddon addonType="append">
-            <Button onClick={() => this.debouncedSearch(this.query)}>
+            <Button onClick={() => this.debouncedSearch()}>
               <FontAwesomeIcon icon="search" />
             </Button>
         </InputGroupAddon>

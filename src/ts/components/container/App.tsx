@@ -27,7 +27,6 @@ class App extends React.Component {
   initGapi = (script: HTMLScriptElement) => {
     /*
       gapi is not made available inmediatly after the script loads
-      so first have to wait until it is ready...
     */
     if (!script.getAttribute('gapi_processed')) {
       setTimeout(() => this.initGapi(script), 300);

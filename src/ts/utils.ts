@@ -1,6 +1,6 @@
 /*
-  Returns a new copy of the same function debounced by the provided delay.
-  A debounced function will cancel repeated calls withn the delay peiord
+  Returns a new copy of the provided function debounced by the provided delay.
+  A debounced function will cancel previous repeated calls within the delay period
   resulting in only the last call being processed.
 */
 function debounce(func: Function, delay: number) {
