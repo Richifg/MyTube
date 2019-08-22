@@ -54,6 +54,7 @@ class PageHeader extends React.Component {
           </Nav>
         </Collapse>
         {/* clock layout position on screen size > medium */}
+        <Clock store={clockStore} md />
       </Navbar>
     </header>
     );
