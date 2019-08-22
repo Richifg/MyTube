@@ -6,8 +6,10 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faPlayCircle,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faPlayCircle,
+  faSearch,
 );
