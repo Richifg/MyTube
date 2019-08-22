@@ -1,0 +1,17 @@
+$color-shades: (
+  red: (light: rgb(252, 34, 34), normal: red,),
+  black: (light: rgb(56, 56, 56), normal: rgb(31, 31, 31) ),
+);
+
+@each $name, $shades in $color-shades {
+  $light: map-get($shades, light);
+  $normal: map-get($shades, normal);
+  .bg-light-#{$name}, .bg-#{$name}-hover:hover, .bg-#{$name}-hover:focus{
+    background-color: #{$light};
+    border-color: #{$light};
+  }
+  .bg-#{$name} {
+    background-color: #{$normal};
+    border-color: #{$normal};
+  }
+}

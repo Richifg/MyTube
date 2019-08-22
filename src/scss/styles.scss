@@ -4,6 +4,7 @@
 @import 'hidden';
 @import 'preview';
 @import 'search';
+@import 'colors';
 
 html, body, #anchor {
   width: 100%;
@@ -12,7 +13,7 @@ html, body, #anchor {
 
 body {
   background-color: $dark;
-  color: $light;
+  color: white;
 }
 
 #anchor {
