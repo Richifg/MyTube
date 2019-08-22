@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
 import {
-  Card, CardImg, CardBody, CardTitle, CardText,
+  Container,
+  Row,
+  Col,
 } from 'reactstrap';
 
+import VideoPreviewCard from '../presentational/VideoPreviewCard';
 import YoutubeStore from '../../stores/YoutubeStore';
 interface IListProps {
   store: YoutubeStore;
@@ -18,19 +21,23 @@ class VideoList extends React.Component<IListProps> {
   render() {
     const { store } = this.props;
     return (
-      <div>
+      <Container fluid>
+        <Row>
         {
-          store.searchVideos.map((video, index) => (
-            <Card color="dark" key={index}>
-              <CardImg src={video.snippet.thumbnails.medium.url} className="w-25"/>
-              <CardBody>
-                <CardTitle>{video.snippet.title}</CardTitle>
-                <CardText>{video.snippet.description}</CardText>
-              </CardBody>
-            </Card>
+          store.searchVideos.map((video) => (
+            <Col xs={12} className="mb-2">
+              <Row className="justify-content-center">
+                <VideoPreviewCard
+                  img={video.snippet.thumbnails.medium.url}
+                  title={video.snippet.title}
+                  description={video.snippet.description}
+                />
+              </Row>
+            </Col>
           ))
         }
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
