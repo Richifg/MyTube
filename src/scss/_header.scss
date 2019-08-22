@@ -1,0 +1,15 @@
+$header-title-font-size: 2.2rem; 
+
+.header-title {
+  cursor: pointer;
+  display: inline;
+  vertical-align: text-bottom;
+  color: white;
+  font-size: $header-title-font-size;
+}
+
+.header-icon {
+  cursor: pointer;
+  color: red;
+  font-size: $header-title-font-size;
+}

@@ -1,0 +1,12 @@
+.hidden-md-down {
+  display: none;
+  @include media-breakpoint-up(md) {
+    display: initial;
+  }
+}
+
+.hidden-md-up {
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
