@@ -20,6 +20,7 @@ class FavoritesStore {
     const newFavorites = [...this.videos];
     if (index === -1) {
       newFavorites.push(video);
+      newFavorites.sort((video1, video2) => video1.title > video2.title ? 1 : -1);
     } else {
       newFavorites.splice(index, 1);
     }
