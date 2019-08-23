@@ -2,11 +2,11 @@ import * as React from 'react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-// Page imports
-import MainPage from '../../pages/MainPage';
+import LoadingSpinner from '../presentational/LoadingSpinner';
+import SearchPage from '../../pages/SearchPage';
 
 // TODO: figure out how to avoid making this key public...
-const APIkey = 'AIzaSyAPKUZyEu7C4JuvU2Fw0BIHPczAZLKgAwU';
+const APIkey = 'AIzaSyBNkL_Wcd0b90EKM_pQ9yZtSSTvzx_gwCg';
 
 @observer
 class App extends React.Component {
@@ -29,7 +29,7 @@ class App extends React.Component {
       gapi is not made available inmediatly after the script loads
     */
     if (!script.getAttribute('gapi_processed')) {
-      setTimeout(() => this.initGapi(script), 300);
+      setTimeout(() => this.initGapi(script), 50);
       return;
     }
     gapi.client.setApiKey(APIkey);
@@ -40,12 +40,10 @@ class App extends React.Component {
   render() {
     if (this.isGapiReady) {
       return (
-        <MainPage/>
+        <SearchPage/>
       );
     }
-    return (
-      <h1>LOADING GAPI...</h1>
-    );
+    return ( <LoadingSpinner message="Loading Google API..."/> );
   }
 }
 
