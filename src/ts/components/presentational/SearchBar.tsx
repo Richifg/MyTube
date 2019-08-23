@@ -10,7 +10,6 @@ import {
 } from 'reactstrap';
 
 import { debounce } from '../../utils';
-
 import { IYoutube } from '../../interfaces';
 
 @inject('youtube')

@@ -1,20 +1,31 @@
 import * as React from 'react';
 import { observable } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, Provider } from 'mobx-react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+
+// pages
+import SearchPage from '../../pages/SearchPage';
+import VideoPage from '../../pages/VideoPage';
+import FavoritesPage from '../../pages/FavoritesPage';
+
+// stores
+import YoutubeStore from '../../stores/YoutubeStore';
+import FavoritesStore from '../../stores/FavoritesStore';
 
 import LoadingSpinner from '../presentational/LoadingSpinner';
-import SearchPage from '../../pages/SearchPage';
-
-// TODO: figure out how to avoid making this key public...
-const APIkey = 'AIzaSyBNkL_Wcd0b90EKM_pQ9yZtSSTvzx_gwCg';
+import { APIkey } from '../../../../APIkey';
 
 @observer
 class App extends React.Component {
   @observable isGapiReady: boolean;
+  youtubeStore: YoutubeStore;
+  favoritesStore: FavoritesStore;
 
   constructor(props: any) {
     super(props);
     this.isGapiReady = false;
+    this.youtubeStore = new YoutubeStore();
+    this.favoritesStore = new FavoritesStore();
   }
 
   componentDidMount() {
@@ -40,7 +51,14 @@ class App extends React.Component {
   render() {
     if (this.isGapiReady) {
       return (
-        <SearchPage/>
+        <Provider youtube={this.youtubeStore} favorites={this.favoritesStore}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={SearchPage}/>
+              <Route path="/favorites" component={FavoritesPage} />
+            </Switch>
+          </Router>
+        </Provider>
       );
     }
     return ( <LoadingSpinner message="Loading Google API..."/> );
