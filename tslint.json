@@ -10,7 +10,8 @@
         "object-literal-sort-keys": false,
         "member-access": false,
         "jsx-boolean-value": false,
-        "ban-types": false
+        "ban-types": false,
+        "arrow-parens": [true, "ban-single-arg-parens"]
     },
     "rulesDirectory": []
 }

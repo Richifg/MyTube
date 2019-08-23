@@ -21,7 +21,7 @@ const truncateString = (str: string, maxLength: number) => {
 class YoutubeStore {
   @observable searchVideos: IVideo[];
   @observable query: string;
-  nextPage: string;
+  private nextPage: string;
 
   constructor() {
     this.searchVideos = [];
@@ -30,7 +30,28 @@ class YoutubeStore {
     autorun(() => console.log(this.searchVideos));
   }
 
-  handleSearchResponse = (response: any, next: boolean = false) => {
+  // actions
+  search = () => {
+    // ##DEBUG
+    console.log('opening list request for search...' + this.query);
+    if (this.query) {
+      // could't find working types for youtube
+      (gapi.client as any).youtube.search.list(searchOptions(this.query))
+        .then(this.handleSearchResponse);
+    } else {
+      this.searchVideos = [];
+      this.nextPage = '';
+      }
+  }
+
+  searchNext = () => {
+    // ##DEBUG
+    console.log('opening list request for next search...' + this.query);
+    (gapi.client as any).youtube.search.list(searchNextOptions(this.query, this.nextPage))
+      .then((response: any) => this.handleSearchResponse(response, true));
+  }
+
+   private handleSearchResponse = (response: any, next: boolean = false) => {
     // ##DEBUG
     console.log('sucess!');
     const body = JSON.parse(response.body);
@@ -46,27 +67,6 @@ class YoutubeStore {
       this.searchVideos = newVideos;
     }
     this.nextPage = body.nextPageToken;
-  }
-
-  // actions
-  search = () => {
-    // ##DEBUG
-    console.log('opening list request for search...' + this.query);
-    if (this.query) {
-      // could't find working types for youtube
-      (gapi.client as any).youtube.search.list(searchOptions(this.query))
-        .then(this.handleSearchResponse);
-    } else {
-      this.searchVideos = [];
-      this.nextPage = '';
-     }
-  }
-
-  searchNext = () => {
-    // ##DEBUG
-    console.log('opening list request for next search...' + this.query);
-    (gapi.client as any).youtube.search.list(searchNextOptions(this.query, this.nextPage))
-      .then((response: any) => this.handleSearchResponse(response, true));
   }
 }
 

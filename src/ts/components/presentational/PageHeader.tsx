@@ -15,19 +15,19 @@ import {
 import ClockStore from '../../stores/ClockStore';
 import Clock from './Clock';
 
-const clockStore = new ClockStore();
-
 @observer
 class PageHeader extends React.Component {
   @observable isOpen: boolean;
+  clockStore: ClockStore;
 
   constructor(props: any) {
     super(props);
     this.isOpen = false;
+    this.clockStore = new ClockStore();
   }
 
   componentWillUmount() {
-    clearInterval(clockStore.intervalId);
+    clearInterval(this.clockStore.intervalId);
   }
 
   toggle = () => { this.isOpen = !this.isOpen; };
@@ -41,20 +41,20 @@ class PageHeader extends React.Component {
             <h1 className="header-title ml-1">MyTube</h1>
           </NavbarBrand>
           {/* clock layout position on screen size < medium */}
-          <Clock store={clockStore} sm />
+          <Clock store={this.clockStore} sm />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.isOpen} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/">Search</NavLink>
+                <NavLink href="#/">Search</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">Favorites</NavLink>
+                <NavLink href="#/favorites">Favorites</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
           {/* clock layout position on screen size > medium */}
-          <Clock store={clockStore} md />
+          <Clock store={this.clockStore} md />
         </Navbar>
       </header>
     );
