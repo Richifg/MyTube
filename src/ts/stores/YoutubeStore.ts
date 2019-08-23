@@ -1,21 +1,5 @@
 import { observable, autorun } from 'mobx';
-
-// interfaces
-interface IItems {
-  etag: string;
-  snippet: {
-    id: string;
-    title: string;
-    description: string;
-    thumbnails: { medium: { url: string}}
-  };
-}
-interface IVideo {
-  title: string;
-  description: string;
-  img: string;
-  id?: string;
-}
+import { ISearchItem, IVideo } from '../interfaces';
 
 // helper functions
 const searchOptions = (query: string) => ({
@@ -43,11 +27,14 @@ class YoutubeStore {
     this.searchVideos = [];
     this.nextPage = '';
     this.query = '';
+    autorun(() => console.log(this.searchVideos));
   }
 
   handleSearchResponse = (response: any, next: boolean = false) => {
+    // ##DEBUG
+    console.log('sucess!');
     const body = JSON.parse(response.body);
-    const newVideos = body.items.map((item: IItems) => ({
+    const newVideos = body.items.map((item: ISearchItem) => ({
       title: item.snippet.title,
       description: truncateString(item.snippet.description, 125),
       img: item.snippet.thumbnails.medium.url,
@@ -64,7 +51,7 @@ class YoutubeStore {
   // actions
   search = () => {
     // ##DEBUG
-    console.log('opening list request for search...');
+    console.log('opening list request for search...' + this.query);
     if (this.query) {
       // could't find working types for youtube
       (gapi.client as any).youtube.search.list(searchOptions(this.query))
@@ -77,11 +64,10 @@ class YoutubeStore {
 
   searchNext = () => {
     // ##DEBUG
-    console.log('opening list request for next search...');
+    console.log('opening list request for next search...' + this.query);
     (gapi.client as any).youtube.search.list(searchNextOptions(this.query, this.nextPage))
       .then((response: any) => this.handleSearchResponse(response, true));
   }
-
 }
 
-export { YoutubeStore as default, IVideo};
+export default YoutubeStore ;
