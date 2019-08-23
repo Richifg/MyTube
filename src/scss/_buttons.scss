@@ -1,0 +1,18 @@
+@mixin favorite-active() {
+  background-color: red;
+  color: white;
+}
+
+.button-favorite {
+  height: 1.8rem;
+  width: 2rem;
+  padding: 0 .5rem;
+  margin-left: auto;
+  &:hover {
+    @include favorite-active();
+  }
+}
+
+.button-favorite-active {
+  @include favorite-active();
+}

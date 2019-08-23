@@ -7,9 +7,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faPlayCircle,
   faSearch,
+  faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faPlayCircle,
   faSearch,
+  faBookmark,
 );
