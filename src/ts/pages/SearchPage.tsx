@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 
 import PageHeader from '../components/presentational/PageHeader';
 import PageMain from '../components/presentational/PageMain';
-import SearchBar from '../components/presentational/SearchBar';
+import SearchBar from '../components/container/SearchBar';
 import VideoPreviewList from '../components/container/VideoPreviewList';
 import LoadMoreButton from '../components/presentational/ButtonLoadMore';
 import { IYoutube } from '../interfaces';
