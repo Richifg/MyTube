@@ -26,7 +26,7 @@ class VideoPreviewCard extends React.Component<IVideoCard> {
         <CardImg src={img} className="preview-img" />
         <CardBody>
           <CardTitle className="preview-title" maxLength={125}>
-            {title}
+            <a href={`#/video/${id}`}>{title}</a>
             <ButtonAddFavorite
               active={favorites.isVideoFavorite(id)}
               onClick={() => favorites.toggleFavorite(video)}

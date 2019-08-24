@@ -10,6 +10,10 @@ interface IVideoList extends IFavorites, IYoutube {
   showFavorites?: boolean;
 }
 
+// TODO: TURN THIS INTO FUNCTION COMP
+// TODO: TURN THIS INTO FUNCTION COMP
+// TODO: TURN THIS INTO FUNCTION COMP
+// TODO: TURN THIS INTO FUNCTION COMP
 @inject('youtube', 'favorites')
 @observer
 class VideoPreviewList extends React.Component<IVideoList> {

@@ -55,7 +55,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={SearchPage}/>
               <Route path="/favorites" component={FavoritesPage} />
-              <Route path="/video" component={VideoPage} />
+              <Route path="/video/:id" component={VideoPage} />
               <Route component={NoMatchPage} />
             </Switch>
           </Router>

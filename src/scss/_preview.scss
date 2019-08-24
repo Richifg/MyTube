@@ -14,15 +14,17 @@
 }
 
 .preview-title {
-  cursor: pointer;
   font-size: 1.1rem;
   font-weight: bold;
   display: flex;
   flex-direction: row;
   word-break: break-all;
-  &:hover {
-    text-decoration: underline; 
- }
+  & a{
+    color: white;
+    &:hover {
+      color: rgb(212, 211, 211);
+    }
+  }
 }
 
 .preview-description {
