@@ -7,6 +7,7 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchPage from '../../pages/SearchPage';
 import VideoPage from '../../pages/VideoPage';
 import FavoritesPage from '../../pages/FavoritesPage';
+import NoMatchPage from '../../pages/NoMatchPage';
 
 // stores
 import YoutubeStore from '../../stores/YoutubeStore';
@@ -65,6 +66,8 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={SearchPage}/>
               <Route path="/favorites" component={FavoritesPage} />
+              <Route path="/video" component={VideoPage} />
+              <Route component={NoMatchPage} />
             </Switch>
           </Router>
         </Provider>
