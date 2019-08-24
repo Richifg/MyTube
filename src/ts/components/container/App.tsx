@@ -19,33 +19,22 @@ import { APIkey } from '../../../../APIkey';
 @observer
 class App extends React.Component {
   @observable isGapiReady: boolean;
-  @observable isIframeReady: boolean;
   youtubeStore: YoutubeStore;
   favoritesStore: FavoritesStore;
 
   constructor(props: any) {
     super(props);
     this.isGapiReady = false;
-    this.isIframeReady = false;
     this.youtubeStore = new YoutubeStore();
     this.favoritesStore = new FavoritesStore();
   }
 
   componentDidMount() {
-    // Initialize both APIs
-
-    const scriptIframe = document.createElement('script');
-    scriptIframe.src = 'https://www.youtube.com/iframe_api';
-    // this function is called by the API automatically when its code downloads
-    (window as any).onYouTubeIframeAPIReady = () => this.isIframeReady = true;
-
-    const scriptGapi = document.createElement('script');
-    scriptGapi.src = 'https://apis.google.com/js/client.js';
-    // gapi only sets a flag in the script tag so have to check for it manually
-    scriptGapi.onload = () => this.initGapi(scriptGapi);
-
-    document.head.appendChild(scriptIframe);
-    document.head.appendChild(scriptGapi);
+    const script = document.createElement('script');
+    script.src = 'https://apis.google.com/js/client.js';
+    // gapi sets a flag in the script tag when ready so have to check for it manually
+    script.onload = () => this.initGapi(script);
+    document.head.appendChild(script);
   }
 
   initGapi = (script: HTMLScriptElement) => {
@@ -59,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.isGapiReady && this.isIframeReady) {
+    if (this.isGapiReady) {
       return (
         <Provider youtube={this.youtubeStore} favorites={this.favoritesStore}>
           <Router>
