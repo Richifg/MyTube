@@ -9,15 +9,7 @@ export interface IFavorites {
   favorites?: FavoritesStore;
 }
 
-// videos shape used througout the app
-export interface IVideoSnippet {
-  title: string;
-  description: string;
-  img: string;
-  id?: string;
-}
-
-// stats shape
+// video stats shape
 export interface IVideoInfo {
   title: string;
   description: string;
@@ -25,4 +17,20 @@ export interface IVideoInfo {
   dislikes: string;
   views: string;
   comments: number;
+}
+
+// videos snippet shape used for previews (this one has truncated description)
+export interface IVideoSnippet {
+  title: string;
+  description: string;
+  img: string;
+  id?: string;
+}
+
+// shape of comments
+export interface IComment {
+  userName: string;
+  userImg: string;
+  text: string;
+  id?: string;
 }
