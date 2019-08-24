@@ -6,7 +6,7 @@ import PageHeader from '../components/presentational/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import SearchBar from '../components/container/SearchBar';
 import VideoPreviewList from '../components/presentational/VideoPreviewList';
-import LoadMoreButton from '../components/presentational/ButtonLoadMore';
+import LoadMoreButton from '../components/presentational/ButtonGeneric';
 import { IYoutube } from '../interfaces';
 
 const MainPage = inject('youtube')(observer(({ youtube }: IYoutube) => (
@@ -20,7 +20,7 @@ const MainPage = inject('youtube')(observer(({ youtube }: IYoutube) => (
         <VideoPreviewList videos={youtube.searchVideos}/>
         { !!youtube.searchVideos.length && (
           <Row className="justify-content-center my-4">
-            <LoadMoreButton />
+            <LoadMoreButton  message="show more..." onClick={() => youtube.searchNext()}/>
           </Row>
         )}
       </Container>
