@@ -1,11 +1,11 @@
 @include media-breakpoint-up(sm) {
   .preview-card {
     flex-direction: row;
-    max-width: 900px;
+    max-width: $preview-card-max-width;
   }
   .preview-img {
-    max-width: 320px;
-    max-height: 180px;
+    max-width: $preview-img-max-width;
+    max-height: $preview-img-max-height;
   }  
 }
 
@@ -14,7 +14,7 @@
 }
 
 .preview-title {
-  font-size: 1.1rem;
+  font-size: $preview-title-font-size;
   font-weight: bold;
   display: flex;
   flex-direction: row;
@@ -28,6 +28,6 @@
 }
 
 .preview-description {
-  font-size: 1rem;
+  font-size: $preview-description-font-size;
   word-break: break-all;
 }

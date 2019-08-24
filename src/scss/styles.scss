@@ -1,10 +1,13 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
+
+@import 'constants';
+@import 'colors';
+
 @import 'header';
 @import 'scroll';
 @import 'hidden';
 @import 'preview';
 @import 'search';
-@import 'colors';
 @import 'buttons';
 @import 'video';
 @import 'stats';

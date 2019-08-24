@@ -8,13 +8,13 @@
   flex-direction: column;  
 }
 .stat-icon {
-  font-size: 1.3rem;
+  font-size: $stat-icon-font-size;
   margin-left: auto;
   margin-right: auto;
 }
 
 .stat-text {
-  font-size: .9rem;
+  font-size: $stat-text-font-size;
 }
 
 @include media-breakpoint-up(sm) {

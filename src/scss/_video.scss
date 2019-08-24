@@ -1,5 +1,3 @@
-$video-max-width: 900px;
-
 // forces 16:9 ratio on children
 .video-ratio {
   position: relative;
@@ -20,4 +18,8 @@ $video-max-width: 900px;
   right: 0;
   width: 100%;
   height: 100%;
+}
+
+.video-title {
+  max-width: $video-max-width;
 }
