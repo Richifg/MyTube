@@ -12,7 +12,6 @@ class FavoritesStore {
 
   constructor() {
     this.videos = [];
-    autorun(() => console.log(this.videos));
   }
 
   toggleFavorite(video: IVideoSnippet) {
