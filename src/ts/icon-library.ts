@@ -8,10 +8,16 @@ import {
   faPlayCircle,
   faSearch,
   faBookmark,
+  faThumbsUp,
+  faThumbsDown,
+  faEye,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
   faPlayCircle,
   faSearch,
   faBookmark,
+  faThumbsUp,
+  faThumbsDown,
+  faEye,
 );

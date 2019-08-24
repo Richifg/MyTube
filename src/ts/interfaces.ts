@@ -27,3 +27,10 @@ export interface IVideo {
   img: string;
   id?: string;
 }
+
+// stats shape
+export interface IStats {
+  likes: string;
+  dislikes: string;
+  views: string;
+}

@@ -1,0 +1,30 @@
+.stats-container {
+  max-width: $video-max-width;
+  width: 100%;
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: column;  
+}
+.stat-icon {
+  font-size: 1.3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-text {
+  font-size: .9rem;
+}
+
+@include media-breakpoint-up(sm) {
+  .stat-container {
+    flex-direction: row;
+  }
+  .stat-icon {
+    margin-right: .3rem;
+  }
+  .stat-text {
+    margin-right: auto;
+  }
+}
