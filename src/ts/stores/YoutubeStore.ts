@@ -1,64 +1,75 @@
 import { observable, autorun } from 'mobx';
-import { ISearchItem, IVideo } from '../interfaces';
 
-// helper functions
-const searchOptions = (query: string) => ({
+import { IVideoSnippet, IVideoInfo } from '../interfaces';
+import { elipsis, shortFormat } from '../utils';
+
+// youtube data api request options
+const searchVideosOptions = (query: string) => ({
   part: 'snippet',
-    maxResults: 25,
-    type: 'video',
-    q: query,
-    fields: 'nextPageToken,items(id(videoId),snippet(title,description,thumbnails(medium(url))))',
+  maxResults: 25,
+  type: 'video',
+  q: query,
+  fields: 'nextPageToken,items(id(videoId),snippet(title,description,thumbnails(medium(url))))',
 });
-const searchNextOptions = (query: string, pageToken: string ) => (
-  Object.assign({}, searchOptions(query), { pageToken })
+const searchNextOptions = ({query, token}: {query: string, token: string }) => (
+  Object.assign({}, searchVideosOptions(query), { token })
 );
-const truncateString = (str: string, maxLength: number) => {
-  return (str.length > maxLength
-  ? `${str.substr(0, 122)}...`
-  : str);
-};
+const videosStatsOptions = (id: string) => ({
+  part: 'statistics,snippet',
+  fields: 'items(statistics(viewCount,likeCount,dislikeCount,commentCount),snippet(title,description))',
+  id,
+});
 
 class YoutubeStore {
-  @observable searchVideos: IVideo[];
-  @observable query: string;
-  private nextPage: string;
+  @observable public searchVideos: IVideoSnippet[];
+  @observable public videoInfo: IVideoInfo;
+  private nextQuery: { query: string, token: string };
 
   constructor() {
     this.searchVideos = [];
-    this.nextPage = '';
-    this.query = '';
+    this.videoInfo = {
+      title: '', description: '', likes: '0', dislikes: '0', views: '0', comments: 0,
+    };
+    this.nextQuery = { query: '', token: '' };
     autorun(() => console.log(this.searchVideos));
+    autorun(() => console.log(this.videoInfo));
   }
 
   // actions
-  search = () => {
+  public search(query: string) {
     // ##DEBUG
-    console.log('opening list request for search...' + this.query);
-    if (this.query) {
+    console.log('opening list request for search...' + query);
+    this.nextQuery.query = query;
+    if (query) {
       // could't find working types for youtube
-      (gapi.client as any).youtube.search.list(searchOptions(this.query))
+      (gapi.client as any).youtube.search.list(searchVideosOptions(query))
         .then(this.handleSearchResponse);
     } else {
-      this.searchVideos = [];
-      this.nextPage = '';
+      this.nextQuery = { query: '', token: '' };
       }
   }
-
-  searchNext = () => {
+  public searchNext() {
     // ##DEBUG
-    console.log('opening list request for next search...' + this.query);
-    (gapi.client as any).youtube.search.list(searchNextOptions(this.query, this.nextPage))
+    console.log('opening list request for next search...' + this.nextQuery);
+    (gapi.client as any).youtube.search.list(searchNextOptions(this.nextQuery))
       .then((response: any) => this.handleSearchResponse(response, true));
   }
+  public requestStats(id: string) {
+    // ##DEBUG
+    console.log('opening list request stats...' + id);
+    (gapi.client as any).youtube.videos.list(videosStatsOptions(id))
+      .then(this.handleVideosResponse);
+  }
 
-   private handleSearchResponse = (response: any, next: boolean = false) => {
+  private handleSearchResponse = (response: any, next: boolean = false) => {
     // ##DEBUG
     console.log('sucess!');
     const body = JSON.parse(response.body);
-    const newVideos = body.items.map((item: ISearchItem) => ({
+    this.nextQuery.token = body.nextPageToken;
+    const newVideos = body.items.map((item: any) => ({
       title: item.snippet.title,
-      description: truncateString(item.snippet.description, 125),
-      img: item.snippet.thumbnails.medium.url, 
+      description: elipsis(item.snippet.description, 125),
+      img: item.snippet.thumbnails.medium.url,
       id: item.id.videoId,
     }));
     if (next) {
@@ -66,7 +77,20 @@ class YoutubeStore {
     } else {
       this.searchVideos = newVideos;
     }
-    this.nextPage = body.nextPageToken;
+  }
+
+  private handleVideosResponse = (response: any) => {
+    // ##DEBUG
+    console.log('sucess!');
+    const info = JSON.parse(response.body).items[0];
+    this.videoInfo = {
+      title: info.snippet.title,
+      description: info.snippet.description,
+      likes: shortFormat(info.statistics.likeCount),
+      dislikes: shortFormat(info.statistics.dislikeCount),
+      views: shortFormat(info.statistics.viewCount),
+      comments: info.statistics.commentCount,
+    };
   }
 }
 
