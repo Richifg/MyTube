@@ -1,6 +1,6 @@
 $color-shades: (
   red: (light: rgb(252, 34, 34), normal: red,),
-  black: (light: rgb(56, 56, 56), normal: rgb(31, 31, 31) ),
+  black: (light: rgb(31, 31, 31), normal:  black),
 );
 
 @each $name, $shades in $color-shades {

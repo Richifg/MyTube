@@ -34,7 +34,7 @@ class PageHeader extends React.Component {
 
   render() {
     return (
-        <header className=" bg-black">
+      <header className="bg-light-black">
         <Navbar dark expand="md" className="justify-content-end">
           <NavbarBrand className="p-0 mr-auto">
             <FontAwesomeIcon icon="play-circle" className="header-icon"/>
