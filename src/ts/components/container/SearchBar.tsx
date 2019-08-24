@@ -21,20 +21,20 @@ class SearchBar extends React.Component<IYoutube> {
   constructor(props: any) {
     super(props);
     this.query = '';
-    this.debouncedSearch = debounce(this.props.youtube.search, 1000);
+    this.debouncedSearch = debounce(this.props.youtube.search, 750, this.props.youtube);
   }
 
   updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.youtube.query = e.target.value;
-    this.debouncedSearch();
+    this.query = e.target.value;
+    this.debouncedSearch(this.query);
   }
 
   render() {
     return(
       <InputGroup className="search-bar">
-        <Input placeholder="Search" onChange={this.updateQuery} value={this.props.youtube.query}/>
+        <Input placeholder="Search" onChange={this.updateQuery} value={this.query}/>
         <InputGroupAddon addonType="append">
-            <Button onClick={() => this.props.youtube.search()}>
+            <Button onClick={() => this.props.youtube.search(this.query)}>
               <FontAwesomeIcon icon="search" />
             </Button>
         </InputGroupAddon>
