@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react';
 import PageHeader from '../components/presentational/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import SearchBar from '../components/container/SearchBar';
-import VideoPreviewList from '../components/container/VideoPreviewList';
+import VideoPreviewList from '../components/presentational/VideoPreviewList';
 import LoadMoreButton from '../components/presentational/ButtonLoadMore';
 import { IYoutube } from '../interfaces';
 
@@ -17,7 +17,7 @@ const MainPage = inject('youtube')(observer(({ youtube }: IYoutube) => (
         <Row className="justify-content-center m-2">
           <SearchBar />
         </Row>
-        <VideoPreviewList />
+        <VideoPreviewList videos={youtube.searchVideos}/>
         { !!youtube.searchVideos.length && (
           <Row className="justify-content-center my-4">
             <LoadMoreButton />

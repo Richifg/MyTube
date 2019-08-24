@@ -4,11 +4,11 @@ import {
   Card, CardImg, CardBody, CardTitle, CardText,
 } from 'reactstrap';
 
-import { IVideo, IFavorites } from '../../interfaces';
+import { IVideoSnippet, IFavorites } from '../../interfaces';
 import ButtonAddFavorite from './ButtonAddFavorite';
 
 interface IVideoCard extends IFavorites {
-  video: IVideo;
+  video: IVideoSnippet;
 }
 
 @inject('favorites')

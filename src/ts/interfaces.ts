@@ -9,19 +9,8 @@ export interface IFavorites {
   favorites?: FavoritesStore;
 }
 
-// items as expected from youtube search query
-export interface ISearchItem {
-  id: { videoId: string };
-  snippet: {
-    id: string;
-    title: string;
-    description: string;
-    thumbnails: { medium: { url: string } }
-  };
-}
-
 // videos shape used througout the app
-export interface IVideo {
+export interface IVideoSnippet {
   title: string;
   description: string;
   img: string;
@@ -29,8 +18,11 @@ export interface IVideo {
 }
 
 // stats shape
-export interface IStats {
+export interface IVideoInfo {
+  title: string;
+  description: string;
   likes: string;
   dislikes: string;
   views: string;
+  comments: number;
 }

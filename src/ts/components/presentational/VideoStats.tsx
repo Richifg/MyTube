@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ButtonFavorite from '../presentational/ButtonAddFavorite';
 
-import { IStats } from '../../interfaces';
+import { IVideoInfo } from '../../interfaces';
 interface IVideoStats {
-  stats?: IStats;
-  active?: boolean;
+  stats: IVideoInfo;
+  active: boolean;
+  onClick: () => void;
 }
 
-const VideoStats = ({ stats, active }: IVideoStats) => (
+const VideoStats = ({ stats, active, onClick }: IVideoStats) => (
   <div className="stats-container">
     <Row className="mx-0 mt-2">
       <Col xs={9} sm={7} md={5}>
@@ -36,7 +37,7 @@ const VideoStats = ({ stats, active }: IVideoStats) => (
         </Row>
       </Col>
       <Col xs={{ size: 2, offset: 1 }} sm={{ size: 1, offset: 3}} md={{ size: 1, offset: 6}}>
-        <ButtonFavorite active={active}/>
+        <ButtonFavorite active={active} onClick={onClick}/>
       </Col>
     </Row>
   </div>

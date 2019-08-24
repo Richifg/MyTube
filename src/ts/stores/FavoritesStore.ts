@@ -1,13 +1,13 @@
 import { observable, autorun } from 'mobx';
 import { computedFn } from 'mobx-utils';
 
-import { IVideo } from '../interfaces';
+import { IVideoSnippet } from '../interfaces';
 
 class FavoritesStore {
-  @observable videos: IVideo[];
+  @observable videos: IVideoSnippet[];
 
   isVideoFavorite = computedFn(function asd(id: string) {
-    return this.videos.some((video: IVideo) => video.id === id);
+    return this.videos.some((video: IVideoSnippet) => video.id === id);
   });
 
   constructor() {
@@ -15,7 +15,7 @@ class FavoritesStore {
     autorun(() => console.log(this.videos));
   }
 
-  toggleFavorite(video: IVideo) {
+  toggleFavorite(video: IVideoSnippet) {
     const index = this.videos.findIndex(favVideo => favVideo.id === video.id);
     const newFavorites = [...this.videos];
     if (index === -1) {

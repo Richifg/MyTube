@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { inject, observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 import VideoStats from '../presentational/VideoStats';
 import { IFavorites } from '../../interfaces';
@@ -9,9 +9,9 @@ interface IStatsContainer extends IYoutube, IFavorites {
   id: string;
 }
 
-@inject('youtube, favorites')
+@inject('youtube', 'favorites')
 @observer
-class VideoStatsContainer extends React.Component<IStatsContainer> {
+class StatsContainer extends React.Component<IStatsContainer> {
 
   constructor(props: any) {
     super(props);
@@ -19,13 +19,18 @@ class VideoStatsContainer extends React.Component<IStatsContainer> {
   }
   render() {
     const { youtube, favorites, id } = this.props;
+    const active = favorites.isVideoFavorite(id);
+    const videoSnippet = active
+      ? favorites.videos.find(video => video.id === id)
+      : youtube.searchVideos.find(video => video.id === id);
     return (
       <VideoStats
-        active={favorites.isVideoFavorite(id)}
-        stats={youtube.videoStats(id)}
+        active={active}
+        stats={youtube.videoInfo}
+        onClick={() => this.props.favorites.toggleFavorite(videoSnippet)}
       />
     );
   }
 }
 
-export default VideoStatsContainer;
+export default StatsContainer;
