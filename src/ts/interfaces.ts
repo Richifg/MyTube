@@ -11,12 +11,12 @@ export interface IFavorites {
 
 // items as expected from youtube search query
 export interface ISearchItem {
-  etag: string;
+  id: { videoId: string };
   snippet: {
     id: string;
     title: string;
     description: string;
-    thumbnails: { medium: { url: string}}
+    thumbnails: { medium: { url: string } }
   };
 }
 

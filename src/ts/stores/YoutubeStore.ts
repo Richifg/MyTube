@@ -7,7 +7,7 @@ const searchOptions = (query: string) => ({
     maxResults: 25,
     type: 'video',
     q: query,
-    fields: 'nextPageToken,items(etag,snippet(title,description,thumbnails(medium(url))))',
+    fields: 'nextPageToken,items(id(videoId),snippet(title,description,thumbnails(medium(url))))',
 });
 const searchNextOptions = (query: string, pageToken: string ) => (
   Object.assign({}, searchOptions(query), { pageToken })
@@ -58,8 +58,8 @@ class YoutubeStore {
     const newVideos = body.items.map((item: ISearchItem) => ({
       title: item.snippet.title,
       description: truncateString(item.snippet.description, 125),
-      img: item.snippet.thumbnails.medium.url,
-      id: item.etag,
+      img: item.snippet.thumbnails.medium.url, 
+      id: item.id.videoId,
     }));
     if (next) {
       this.searchVideos.push(...newVideos);
