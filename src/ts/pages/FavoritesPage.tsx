@@ -5,27 +5,18 @@ import PageHeader from '../components/presentational/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import VideoPreviewList from '../components/container/VideoPreviewList';
 
-class MainPage extends React.Component {
+const FavoritesPage = () => (
+  <React.Fragment>
+    <PageHeader />
+    <PageMain>
+      <Container fluid className="mt-3">
+        <Row className="justify-content-center m-2">
+          <h5>My Favorite Videos</h5>
+        </Row>
+        <VideoPreviewList  showFavorites/>
+      </Container>
+    </PageMain>
+  </React.Fragment>
+);
 
-  constructor(props: any) {
-    super(props);
-  }
-
-  render() {
-    return(
-      <React.Fragment>
-        <PageHeader />
-        <PageMain>
-          <Container fluid className="mt-3">
-            <Row className="justify-content-center m-2">
-              <h5>My Favorite Videos</h5>
-            </Row>
-            <VideoPreviewList  showFavorites/>
-          </Container>
-        </PageMain>
-      </React.Fragment>
-    );
-  }
-}
-
-export default MainPage;
+export default FavoritesPage;
