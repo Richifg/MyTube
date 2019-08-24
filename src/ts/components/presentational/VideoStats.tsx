@@ -2,16 +2,10 @@ import * as React from 'react';
 import { Col, Row } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import ButtonFavorite from '../presentational/ButtonAddFavorite';
-
 import { IVideoInfo } from '../../interfaces';
-interface IVideoStats {
-  stats: IVideoInfo;
-  active: boolean;
-  onClick: () => void;
-}
+interface IVideoStats { stats: IVideoInfo; }
 
-const VideoStats = ({ stats, active, onClick }: IVideoStats) => (
+const VideoStats = ({ stats }: IVideoStats) => (
   <div className="stats-container">
     <Row className="mx-0 mt-2">
       <Col xs={9} sm={7} md={5}>
@@ -35,9 +29,6 @@ const VideoStats = ({ stats, active, onClick }: IVideoStats) => (
             </div>
           </Col>
         </Row>
-      </Col>
-      <Col xs={{ size: 2, offset: 1 }} sm={{ size: 1, offset: 3}} md={{ size: 1, offset: 6}}>
-        <ButtonFavorite active={active} onClick={onClick}/>
       </Col>
     </Row>
   </div>

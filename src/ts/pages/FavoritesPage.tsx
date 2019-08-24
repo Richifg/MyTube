@@ -5,7 +5,7 @@ import { inject, observer } from 'mobx-react';
 import PageHeader from '../components/presentational/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import VideoPreviewList from '../components/presentational/VideoPreviewList';
-import ButtonAddFavorite from '../components/presentational/ButtonAddFavorite';
+import ButtonAddFavorite from '../components/presentational/ButtonFavorite';
 import { IFavorites } from '../interfaces';
 
 const FavoritesPage = inject('favorites')(observer(({ favorites }: IFavorites) => (

@@ -6,7 +6,7 @@ import { IVideoSnippet } from '../interfaces';
 class FavoritesStore {
   @observable videos: IVideoSnippet[];
 
-  isVideoFavorite = computedFn(function asd(id: string) {
+  isVideoFavorite = computedFn(function(id: string) {
     return this.videos.some((video: IVideoSnippet) => video.id === id);
   });
 
