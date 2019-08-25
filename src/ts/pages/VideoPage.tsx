@@ -8,6 +8,7 @@ import VideoTitle from '../components/presentational/VideoTitle';
 import StatsContainer from '../components/container/StatsContainer';
 import CommentsContainer from '../components/container/CommentsContainer';
 import ButtonFavoriteContainer from '../components/container/ButtonFavoriteContainer';
+import VideoDescription from '../components/presentational/VideoDescription';
 
 interface IVideoPage {
   match: { params: { id: string } };
@@ -32,6 +33,9 @@ const VideoPage = ({ match }: IVideoPage) => {
             </Col>
             <Col xs={12} className="mb-3">
               <StatsContainer id={id} />
+            </Col>
+            <Col xs={12} className="mb-3">
+              <VideoDescription />
             </Col>
             <Col xs={12}>
               <CommentsContainer id={id} />

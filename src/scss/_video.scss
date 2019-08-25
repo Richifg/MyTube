@@ -27,5 +27,12 @@
 
 .video-title {
   font-size: $video-title-font-size;
+}
 
+.video-description {
+  color: $text-color-primary;
+  font-size: $video-description-font-size;
+  // to reset the <pre> text font
+  font-family: $font-family-sans-serif;
+  white-space: pre-wrap;
 }
