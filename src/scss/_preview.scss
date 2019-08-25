@@ -16,15 +16,9 @@
 .preview-title {
   font-size: $preview-title-font-size;
   font-weight: bold;
+  word-break: break-all;
   display: flex;
   flex-direction: row;
-  word-break: break-all;
-  & a{
-    color: white;
-    &:hover {
-      color: rgb(212, 211, 211);
-    }
-  }
 }
 
 .preview-description {

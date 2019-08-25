@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import VideoPreviewCard from './VideoPreviewCard';
-import { IVideoSnippet, IFavorites } from '../../interfaces';
+import { IVideoSnippet } from '../../interfaces';
 
 interface IVideoList {
   videos: IVideoSnippet[];

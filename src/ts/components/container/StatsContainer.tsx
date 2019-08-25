@@ -13,8 +13,6 @@ interface IStatsContainer extends IYoutube {
 class StatsContainer extends React.Component<IStatsContainer> {
   constructor(props: any) {
     super(props);
-    // clean and request new comments from youtube store
-    this.props.youtube.videoComments = [];
     this.props.youtube.requestStats(props.id);
   }
   render() {

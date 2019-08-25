@@ -7,7 +7,6 @@ import { elipsis, shortFormat, pointFormat } from '../utils';
 const searchOptions = (query: string) => ({
   part: 'snippet',
   maxResults: 25,
-  textFormat: 'plainText',
   type: 'video',
   q: query,
   fields: 'nextPageToken,items(id(videoId),snippet(title,description,thumbnails(medium(url))))',
@@ -28,18 +27,19 @@ const commentOptions = (videoId: string) => ({
   videoId,
 });
 const commentNextOptions = ({id, token}: {id: string, token: string }) => (
-  Object.assign({}, searchOptions(id), { pageToken: token })
+  Object.assign({}, commentOptions(id), { pageToken: token })
 );
 
 class YoutubeStore {
   @observable public searchVideos: IVideoSnippet[];
-  @observable public videoInfo: IVideoInfo;
   @observable public videoComments: IComment[];
+  @observable public videoInfo: IVideoInfo;
   private nextSearch: { query: string, token: string };
   private nextComments: { id: string, token: string };
 
   constructor() {
     this.searchVideos = [];
+    this.videoComments = [];
     this.videoInfo = {
       title: '', description: '', likes: '0', dislikes: '0', views: '0', comments: '0',
     };
@@ -52,7 +52,8 @@ class YoutubeStore {
     this.nextSearch.query = query;
     if (query) {
       (gapi.client as any).youtube.search.list(searchOptions(query))
-        .then(this.handleSearchResponse);
+        .then(this.handleSearchResponse)
+        .catch(this.handleYoutubeAPIerror);
     } else {
       this.nextSearch = { query: '', token: '' };
       }
@@ -68,6 +69,7 @@ class YoutubeStore {
       .catch(this.handleYoutubeAPIerror);
   }
   public requestComments(id: string) {
+    this.nextComments.id = id;
     (gapi.client as any).youtube.commentThreads.list(commentOptions(id))
       .then(this.handleCommentsResponse)
       .catch(this.handleYoutubeAPIerror);
@@ -96,7 +98,7 @@ class YoutubeStore {
   private handleVideosResponse = (response: any) => {
     const info = JSON.parse(response.body).items[0];
     this.videoInfo = {
-      title: info.snippet.title,
+      title: info.snippet.title.replace(),
       description: info.snippet.description,
       likes: shortFormat(info.statistics.likeCount),
       dislikes: shortFormat(info.statistics.dislikeCount),

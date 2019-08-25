@@ -8,7 +8,7 @@ interface ICommentList {
   comments: IComment[];
   commentsCount: string;
 }
-const VideoPreviewList = ({ comments, commentsCount }: ICommentList) => (
+const CommentList = ({ comments, commentsCount }: ICommentList) => (
   <section>
     <h2 className="comments-header mb-3">{`${commentsCount} comments`}</h2>
     <Row className="justify-content-center">
@@ -23,4 +23,4 @@ const VideoPreviewList = ({ comments, commentsCount }: ICommentList) => (
   </section>
 );
 
-export default VideoPreviewList;
+export default CommentList;
