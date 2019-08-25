@@ -10,7 +10,6 @@ interface IVideoCard  { video: IVideoSnippet; }
 
 const VideoPreviewCard = ({ video }: IVideoCard) => {
   const { img , title, description, id } = video;
-  console.log(title);
   return (
     <a href={`#/video/${id}`}>
       <Card color="dark" className="preview-card mb-2 mx-auto">

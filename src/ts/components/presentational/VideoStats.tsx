@@ -9,13 +9,13 @@ const VideoStats = ({ stats }: IVideoStats) => (
   <Row className="justify-content-start mx-0">
     <div className="stat-container mr-3">
       <FontAwesomeIcon className="stat-icon"icon="eye" />
-      <span className="stat-text">{stats.views}</span>
+      <span className="stat-text">{stats.views + ' views'}</span>
     </div>
     <div className="stat-container mr-3">
       <FontAwesomeIcon className="stat-icon"icon="thumbs-up" />
       <span className="stat-text">{stats.likes}</span>
     </div>
-    <div className="stat-container mr-3">
+    <div className="stat-container">
       <FontAwesomeIcon className="stat-icon"icon="thumbs-down" />
       <span className="stat-text">{stats.dislikes}</span>
     </div>

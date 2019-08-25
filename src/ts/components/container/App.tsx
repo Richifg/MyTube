@@ -15,24 +15,28 @@ import YoutubeStore from '../../stores/YoutubeStore';
 import FavoritesStore from '../../stores/FavoritesStore';
 
 import LoadingSpinner from '../presentational/LoadingSpinner';
-import { APIkey } from '../../../../APIkey';
+import ErrorMessage from '../presentational/ErrorMessage';
+
+interface IApp {
+  apikey: string;
+}
 
 @observer
-class App extends React.Component {
-  @observable isGapiReady: boolean;
+class App extends React.Component<IApp> {
+  @observable apiState: string;
+  apiError: string;
   youtubeStore: YoutubeStore;
   favoritesStore: FavoritesStore;
 
   constructor(props: any) {
     super(props);
-    this.isGapiReady = false;
-    const hydrate = create({
-      debounce: 1000,
-    })    
-    this.youtubeStore = new YoutubeStore();    
+    this.apiState = 'loading';
+    this.apiError = null;
+    const hydrate = create({ debounce: 1000 });
+    this.youtubeStore = new YoutubeStore();
     this.favoritesStore = new FavoritesStore();
-    hydrate('youtube', this.youtubeStore)
-    hydrate('favorites', this.favoritesStore)
+    hydrate('youtube', this.youtubeStore);
+    hydrate('favorites', this.favoritesStore);
   }
 
   componentDidMount() {
@@ -44,18 +48,25 @@ class App extends React.Component {
   }
 
   initGapi = (script: HTMLScriptElement) => {
-  if (!script.getAttribute('gapi_processed')) {
-    setTimeout(() => this.initGapi(script), 50);
-    return;
-  }
-  gapi.client.setApiKey(APIkey);
-  gapi.client.load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest', 'v3')
-    .then(() => { this.isGapiReady = true; });
+    if (!script.getAttribute('gapi_processed')) {
+      setTimeout(() => this.initGapi(script), 50);
+      return;
+    }
+    gapi.client.setApiKey(this.props.apikey);
+    // typescript is not recognizing the catch method of the returned promise like object
+    // so had to wrap gapi as any
+    (gapi.client.load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest', 'v3') as any)
+      .then(() => { this.apiState = 'ready'; })
+      .catch((error: any) => {
+        const e = error.error.errors[0];
+        this.apiError = `${e.message}, reason: ${e.reason}`;
+        this.apiState = 'error';
+      });
   }
 
   render() {
-    if (this.isGapiReady) {
-      return (
+    switch (this.apiState) {
+      case 'ready': return (
         <Provider youtube={this.youtubeStore} favorites={this.favoritesStore}>
           <Router>
             <Switch>
@@ -67,8 +78,13 @@ class App extends React.Component {
           </Router>
         </Provider>
       );
+      case 'loading': return (
+        <LoadingSpinner message={'Loading Google API'}/>
+      );
+      case 'error': return (
+        <ErrorMessage message={this.apiError}/>
+      );
     }
-    return ( <LoadingSpinner message="Initializing Google APIs..."/> );
   }
 }
 
