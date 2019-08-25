@@ -20,7 +20,7 @@ const VideoPage = ({ match }: IVideoPage) => {
       <PageHeader />
       <PageMain>
         <Container fluid className="px-0 mb-5">
-          <Row className="justify-content-center bg-black mx-0 mb-2">
+          <Row className="justify-content-center bg-black mx-0 mb-3">
             <VideoPlayer videoId={id} />
           </Row>
           <Row className="video-info-container justify-content-center mx-auto">

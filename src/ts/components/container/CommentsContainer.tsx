@@ -15,11 +15,14 @@ interface ICommentsContainer extends IYoutube {
 class CommentsContainer extends React.Component<ICommentsContainer> {
   constructor(props: ICommentsContainer) {
     super(props);
+    // cleans and request new comments
+    props.youtube.videoComments = [];
     props.youtube.requestComments(props.id);
   }
 
   render() {
     const commentCount = this.props.youtube.videoInfo.comments;
+    console.log(commentCount, typeof commentCount);
     return (
       <React.Fragment>
         { this.props.youtube.videoComments.length &&
@@ -27,7 +30,7 @@ class CommentsContainer extends React.Component<ICommentsContainer> {
           comments={this.props.youtube.videoComments}
           commentsCount={commentCount}/>
         }
-        { commentCount !== '0' &&
+        { commentCount != '0' &&
         <Row className="justify-content-center">
             <ButtonLoadMore
             onClick={() => this.props.youtube.requestCommentsNext()}
