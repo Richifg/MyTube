@@ -1,10 +1,11 @@
 import { observable, autorun } from 'mobx';
+import { persist } from 'mobx-persist';
 import { computedFn } from 'mobx-utils';
 
 import { IVideoSnippet } from '../interfaces';
 
 class FavoritesStore {
-  @observable videos: IVideoSnippet[];
+  @persist('list') @observable videos: IVideoSnippet[];
 
   isVideoFavorite = computedFn(function(id: string) {
     return this.videos.some((video: IVideoSnippet) => video.id === id);

@@ -1,5 +1,5 @@
-import { observable, autorun } from 'mobx';
-
+import { observable } from 'mobx';
+import { persist } from 'mobx-persist';
 import { IVideoSnippet, IVideoInfo, IComment } from '../interfaces';
 import { elipsis, shortFormat, pointFormat } from '../utils';
 
@@ -31,7 +31,7 @@ const commentNextOptions = ({id, token}: {id: string, token: string }) => (
 );
 
 class YoutubeStore {
-  @observable public searchVideos: IVideoSnippet[];
+  @persist('list') @observable public searchVideos: IVideoSnippet[];
   @observable public videoComments: IComment[];
   @observable public videoInfo: IVideoInfo;
   private nextSearch: { query: string, token: string };

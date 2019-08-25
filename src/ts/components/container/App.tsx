@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { observable } from 'mobx';
+import { create } from 'mobx-persist';
 import { observer, Provider } from 'mobx-react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -25,8 +26,13 @@ class App extends React.Component {
   constructor(props: any) {
     super(props);
     this.isGapiReady = false;
-    this.youtubeStore = new YoutubeStore();
+    const hydrate = create({
+      debounce: 1000,
+    })    
+    this.youtubeStore = new YoutubeStore();    
     this.favoritesStore = new FavoritesStore();
+    hydrate('youtube', this.youtubeStore)
+    hydrate('favorites', this.favoritesStore)
   }
 
   componentDidMount() {
