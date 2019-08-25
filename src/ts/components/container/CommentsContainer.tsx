@@ -22,7 +22,6 @@ class CommentsContainer extends React.Component<ICommentsContainer> {
 
   render() {
     const commentCount = this.props.youtube.videoInfo.comments;
-    console.log(commentCount, typeof commentCount);
     return (
       <React.Fragment>
         { this.props.youtube.videoComments.length &&
@@ -30,7 +29,7 @@ class CommentsContainer extends React.Component<ICommentsContainer> {
           comments={this.props.youtube.videoComments}
           commentsCount={commentCount}/>
         }
-        { commentCount != '0' &&
+        { commentCount !== '0' &&
         <Row className="justify-content-center">
             <ButtonLoadMore
             onClick={() => this.props.youtube.requestCommentsNext()}

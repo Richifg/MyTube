@@ -14,7 +14,7 @@ const CommentCard = ({ comment }: ICommentCard) => (
     </Col>
     <Col xs={9} sm={11}>
       <p className="comment-user">{comment.userName}</p>
-      <p className="comment-text">{comment.text}</p>
+      <pre className="comment-text">{comment.text}</pre>
     </Col>
   </Row>
 

@@ -11,6 +11,10 @@
 .comment-text {
   font-size: $comment-text-font-size;
   color: $text-color-secondary;
+  // to reset the <pre> text font
+  font-family: $font-family-sans-serif;
+  white-space: pre-wrap;
+
 }
 
 .comment-img {
