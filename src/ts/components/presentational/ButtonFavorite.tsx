@@ -8,7 +8,7 @@ interface IButtonFavorite {
 }
 
 const ButtonFavorite = ({ active, onClick }: IButtonFavorite) => (
-  <Button>
+  <Button
     outline
     onClick={onClick}
     className={`button-favorite ${active && 'button-favorite-active'}`}

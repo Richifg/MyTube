@@ -53,3 +53,22 @@ export function shortFormat(num: string) {
   }
   return significantNum + decimals + unit;
 }
+
+/*
+  Returns a string with points in each thousandth of 12.456.789
+*/
+
+export function pointFormat(num: number) {
+  const numStr = String(num);
+  let result = numStr;
+  if (numStr.length > 3) {
+    const initialCut = numStr.length % 3 === 0 ? 3 : numStr.length % 3;
+    result = numStr.substr(0, initialCut);
+    let remainingNum = numStr.substring(initialCut);
+    while (remainingNum) {
+      result = result + '.' + remainingNum.substr(0, 3);
+      remainingNum = remainingNum.substring(3);
+    }
+  }
+  return result;
+}

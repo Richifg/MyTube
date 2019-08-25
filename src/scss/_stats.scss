@@ -1,6 +1,7 @@
 .stat-container {
   display: flex;
-  flex-direction: column;  
+  flex-direction: row;
+  color: $text-secondary-color;
 }
 .stat-icon {
   font-size: $stat-icon-font-size;
@@ -10,12 +11,11 @@
 
 .stat-text {
   font-size: $stat-text-font-size;
+  word-wrap: normal;
+  margin-left: .2rem;
 }
 
 @include media-breakpoint-up(sm) {
-  .stat-container {
-    flex-direction: row;
-  }
   .stat-icon {
     margin-right: .3rem;
   }

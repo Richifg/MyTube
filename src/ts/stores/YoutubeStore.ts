@@ -1,7 +1,7 @@
 import { observable, autorun } from 'mobx';
 
 import { IVideoSnippet, IVideoInfo, IComment } from '../interfaces';
-import { elipsis, shortFormat } from '../utils';
+import { elipsis, shortFormat, pointFormat } from '../utils';
 
 // youtube data api request options
 const searchOptions = (query: string) => ({
@@ -41,7 +41,7 @@ class YoutubeStore {
   constructor() {
     this.searchVideos = [];
     this.videoInfo = {
-      title: '', description: '', likes: '0', dislikes: '0', views: '0', comments: 0,
+      title: '', description: '', likes: '0', dislikes: '0', views: '0', comments: '0',
     };
     this.nextSearch = { query: '', token: '' };
     this.nextComments = { id: '', token: '' };
@@ -100,8 +100,8 @@ class YoutubeStore {
       description: info.snippet.description,
       likes: shortFormat(info.statistics.likeCount),
       dislikes: shortFormat(info.statistics.dislikeCount),
-      views: shortFormat(info.statistics.viewCount),
-      comments: info.statistics.commentCount,
+      views: pointFormat(info.statistics.viewCount),
+      comments: pointFormat(info.statistics.commentCount),
     };
   }
   private handleCommentsResponse = (response: any, next: boolean = false) => {

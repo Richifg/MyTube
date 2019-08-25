@@ -20,15 +20,19 @@ class CommentsContainer extends React.Component<ICommentsContainer> {
   }
 
   render() {
-    const comments = this.props.youtube.videoComments;
+    const { youtube } = this.props;
+    const comments = youtube.videoComments;
+    const commentsCount = youtube.videoInfo.comments;
     return (
-      <div>
-        <CommentsList comments={comments} />
-        <ButtonLoadMore
+      <React.Fragment>
+        <CommentsList comments={comments} commentsCount={commentsCount}/>
+        { commentsCount !== '0' &&
+          <ButtonLoadMore
           onClick={() => this.props.youtube.searchNext()}
           message="show more comments..."
         />
-      </div>
+        }
+      </React.Fragment>
     );
   }
 

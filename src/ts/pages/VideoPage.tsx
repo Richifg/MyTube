@@ -19,19 +19,23 @@ const VideoPage = ({ match }: IVideoPage) => {
     <React.Fragment>
       <PageHeader />
       <PageMain>
-        <Container fluid className="px-0">
-          <Row className="justify-content-center mx-0 bg-black">
+        <Container fluid className="px-0 mb-5">
+          <Row className="justify-content-center bg-black mx-0 mb-2">
             <VideoPlayer videoId={id} />
           </Row>
-          <Row className="video-info-container justify-content-center">
+          <Row className="video-info-container justify-content-center mx-auto">
             <Col xs={10}>
               <VideoTitle />
             </Col>
-            <Col xs={2}>
+            <Col xs={2} sm={{ size: 1, offset: 1}}>
               <ButtonFavoriteContainer id={id} />
             </Col>
-            <StatsContainer id={id} />
-            <CommentsContainer id={id} />
+            <Col xs={12} className="mb-3">
+              <StatsContainer id={id} />
+            </Col>
+            <Col xs={12}>
+              <CommentsContainer id={id} />
+            </Col>
           </Row>
         </Container>
       </PageMain>

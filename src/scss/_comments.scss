@@ -1,0 +1,20 @@
+.comments-header {
+  font-size: $comments-header-font-size; 
+  font-weight: normal;
+}
+.comment-user {
+  font-size: $comment-user-font-size;
+  color: $text-primary-color;
+  margin-bottom: .2rem;
+}
+
+.comment-text {
+  font-size: $comment-text-font-size;
+  color: $text-secondary-color;
+}
+
+.comment-img {
+  width: $comment-image-size;
+  height: $comment-image-size;
+  border-radius: $comment-image-radius;
+}

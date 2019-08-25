@@ -16,7 +16,7 @@ export interface IVideoInfo {
   likes: string;
   dislikes: string;
   views: string;
-  comments: number;
+  comments: string;
 }
 
 // videos snippet shape used for previews (this one has truncated description)

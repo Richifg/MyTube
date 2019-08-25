@@ -12,7 +12,7 @@ const VideoPreviewCard = ({ video }: IVideoCard) => {
   const { img , title, description, id } = video;
   return (
     <Card color="dark" className="preview-card mb-2 mx-auto">
-      <CardImg src={img} className="preview-img" />
+      <CardImg src={img} className="preview-img" alt="video thumbnail" />
       <CardBody>
         <CardTitle className="preview-title" maxLength={125}>
           <a href={`#/video/${id}`}>{title}</a>

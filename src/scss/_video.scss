@@ -20,6 +20,12 @@
   height: 100%;
 }
 
-.video-title {
+.video-info-container {
   max-width: $video-max-width;
+  word-break: break-all;
+}
+
+.video-title {
+  font-size: $video-title-font-size;
+
 }

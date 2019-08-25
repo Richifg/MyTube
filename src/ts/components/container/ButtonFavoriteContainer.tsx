@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { inject, observer } from 'mobx-react';
 
 import ButtonFavorite from '../presentational/ButtonFavorite';
 import { IYoutube, IFavorites } from '../../interfaces';
@@ -12,7 +13,9 @@ import { IYoutube, IFavorites } from '../../interfaces';
 interface IFavoriteButton extends IYoutube, IFavorites {
   id?: string;
 }
-const ButtonAddFavorite = ({ id, youtube, favorites }: IFavoriteButton) => {
+
+const ButtonFavoriteContainer = inject('youtube', 'favorites')
+(observer(({ id, youtube, favorites }: IFavoriteButton) => {
   const active = favorites.isVideoFavorite(id);
   const videoSnippet = active
     ? favorites.videos.find(video => video.id === id)
@@ -23,6 +26,6 @@ const ButtonAddFavorite = ({ id, youtube, favorites }: IFavoriteButton) => {
       onClick={() => favorites.toggleFavorite(videoSnippet)}
     />
   );
-};
+}));
 
-export default ButtonAddFavorite;
+export default ButtonFavoriteContainer;
