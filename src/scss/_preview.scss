@@ -13,15 +13,23 @@
   cursor: pointer;
 }
 
+a:hover, a:focus {
+  & .card-title .preview-title, & .preview-description{
+    text-decoration: none;
+    // weird trick to avoid anchor children from underlining
+    display: inline-block;
+  }
+}
+
 .preview-title {
+  color: $text-color-primary;
   font-size: $preview-title-font-size;
   font-weight: bold;
   word-break: break-all;
-  display: flex;
-  flex-direction: row;
 }
 
 .preview-description {
+  color: $text-color-secondary;
   font-size: $preview-description-font-size;
   word-break: break-all;
 }

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IButtonFavorite {
   active?: boolean;
-  onClick?: () => void;
+  onClick?: any
 }
 
 const ButtonFavorite = ({ active, onClick }: IButtonFavorite) => (
