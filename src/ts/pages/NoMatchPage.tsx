@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'reactstrap';
 
 import PageHeader from '../components/presentational/PageHeader';
 
+// in case an user manually write an invalid page in the browers
+
 const NoMatchPage = () => (
   <React.Fragment>
     <PageHeader />

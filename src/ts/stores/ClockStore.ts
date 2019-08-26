@@ -28,6 +28,7 @@ class ClockStore {
     }
   }
 
+  // returns a AM / PM format hour
   @computed get getTime12hFormat(): string {
     const [hours, minutes] = [this.time.getHours(), this.time.getMinutes()];
     const [displayHour, interval] = hours > 12
