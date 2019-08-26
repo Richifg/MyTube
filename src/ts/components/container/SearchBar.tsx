@@ -22,7 +22,7 @@ class SearchBar extends React.Component<IYoutube> {
   constructor(props: any) {
     super(props);
     this.query = '';
-    this.debouncedSearch = debounce(this.props.youtube.search, 750, this.props.youtube);
+    this.debouncedSearch = debounce(this.props.youtube.search, 500, this.props.youtube);
   }
 
   updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
