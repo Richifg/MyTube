@@ -8,11 +8,13 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchPage from '../../pages/SearchPage';
 import VideoPage from '../../pages/VideoPage';
 import FavoritesPage from '../../pages/FavoritesPage';
+import HistoryPage from '../../pages/HistoryPage';
 import NoMatchPage from '../../pages/NoMatchPage';
 
 // stores
 import YoutubeStore from '../../stores/YoutubeStore';
 import FavoritesStore from '../../stores/FavoritesStore';
+import HistoryStore from '../../stores/HistoryStore';
 
 import LoadingSpinner from '../presentational/LoadingSpinner';
 import ErrorMessage from '../presentational/ErrorMessage';
@@ -27,6 +29,7 @@ class App extends React.Component<IApp> {
   apiError: string;
   youtubeStore: YoutubeStore;
   favoritesStore: FavoritesStore;
+  historyStore: HistoryStore;
 
   constructor(props: any) {
     super(props);
@@ -36,8 +39,10 @@ class App extends React.Component<IApp> {
     // load stores with persisted data (favorites and last search)
     this.youtubeStore = new YoutubeStore();
     this.favoritesStore = new FavoritesStore();
+    this.historyStore = new HistoryStore();
     hydrate('youtube', this.youtubeStore);
     hydrate('favorites', this.favoritesStore);
+    hydrate('wHistory', this.historyStore);
   }
 
   componentDidMount() {
@@ -67,13 +72,19 @@ class App extends React.Component<IApp> {
 
   render() {
     switch (this.apiState) {
+      // history is reserved on provider for page history so using wHistory instead (watch History)
       case 'ready': return (
-        <Provider youtube={this.youtubeStore} favorites={this.favoritesStore}>
+        <Provider
+          youtube={this.youtubeStore}
+          favorites={this.favoritesStore}
+          wHistory={this.historyStore}
+        >
           <Router>
             <Switch>
               <Route exact path="/" component={SearchPage}/>
               <Route path="/favorites" component={FavoritesPage} />
               <Route path="/video/:id" component={VideoPage} />
+              <Route path="/history" component={HistoryPage} />
               <Route component={NoMatchPage} />
             </Switch>
           </Router>
