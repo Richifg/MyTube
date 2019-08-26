@@ -22,24 +22,24 @@ class CommentsContainer extends React.Component<ICommentsContainer> {
 
   render() {
     const commentCount = this.props.youtube.videoInfo.comments;
-    return (
-      <React.Fragment>
-        { this.props.youtube.videoComments.length &&
-          <CommentsList
-          comments={this.props.youtube.videoComments}
-          commentsCount={commentCount}/>
-        }
-        { commentCount !== '0' &&
-        <Row className="justify-content-center">
+    if (commentCount !== '0') {
+      return (
+        <React.Fragment>
+          { this.props.youtube.videoComments.length !== 0 &&
+            <CommentsList
+            comments={this.props.youtube.videoComments}
+            commentsCount={commentCount}/>
+          }
+          <Row className="justify-content-center">
             <ButtonLoadMore
-            onClick={() => this.props.youtube.requestCommentsNext()}
-            message="show more comments..."
-          />
-        </Row>
-        }
-      </React.Fragment>
-    );
+              onClick={() => this.props.youtube.requestCommentsNext()}
+              message="show more comments..."
+            />
+          </Row>
+        </React.Fragment>
+      );
+    }
+    return null;
   }
-
 }
 export default CommentsContainer;
