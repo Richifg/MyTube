@@ -51,6 +51,9 @@ class PageHeader extends React.Component {
               <NavItem>
                 <NavLink href="#/favorites">Favorites</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href="#/history">History</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
           {/* clock layout position on screen size > medium */}

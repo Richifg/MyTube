@@ -1,18 +1,24 @@
 import * as React from 'react';
+import { inject } from 'mobx-react';
 import {
   Card, CardImg, CardBody, CardTitle, CardText,
 } from 'reactstrap';
 
-import { IVideoSnippet } from '../../interfaces';
+import { IVideoSnippet, IHistory } from '../../interfaces';
 import ButtonFavoriteContainer from '../container/ButtonFavoriteContainer';
 
-interface IVideoCard  { video: IVideoSnippet; }
+interface IVideoCard extends IHistory { video: IVideoSnippet; }
 
 // Using bootstrap cards just to meet the project requirements
-const VideoPreviewCard = ({ video }: IVideoCard) => {
+const VideoPreviewCard = inject('wHistory')(({ video, wHistory }: IVideoCard) => {
   const { img , title, description, id } = video;
   return (
-    <div onClick={() => (window.location as any) = `#/video/${video.id}`}>
+    <div onClick={() => {
+      // add video to history and go to video page
+      wHistory.addVideo(video);
+      (window.location as any) = `#/video/${video.id}`;
+    }
+      }>
       <Card color="dark" className="preview-card mb-2 mx-auto">
         <CardImg src={img} className="preview-img" alt="video thumbnail" />
         <CardBody className="p-1 p-sm-3">
@@ -25,6 +31,6 @@ const VideoPreviewCard = ({ video }: IVideoCard) => {
       </Card>
     </div>
   );
-};
+});
 
 export default VideoPreviewCard;

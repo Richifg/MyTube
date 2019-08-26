@@ -1,5 +1,6 @@
 import YoutubeStore from './stores/YoutubeStore';
 import FavoritesStore from './stores/FavoritesStore';
+import HistoryStore from './stores/HistoryStore';
 
 // interfaces for store injection
 export interface IYoutube {
@@ -7,6 +8,9 @@ export interface IYoutube {
 }
 export interface IFavorites {
   favorites?: FavoritesStore;
+}
+export interface IHistory {
+  wHistory?: HistoryStore;
 }
 
 // video stats shape

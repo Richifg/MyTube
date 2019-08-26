@@ -1,4 +1,4 @@
-import { observable, autorun } from 'mobx';
+import { observable } from 'mobx';
 import { persist } from 'mobx-persist';
 import { computedFn } from 'mobx-utils';
 
