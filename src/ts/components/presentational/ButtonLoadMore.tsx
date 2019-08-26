@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { Button } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 
 interface IGeneric {
   message: string;
   onClick: () => void;
+  isLoading: boolean;
 }
 
-const LoadMoreButton = ({ onClick, message }: IGeneric ) => (
+const LoadMoreButton = ({ onClick, message, isLoading }: IGeneric ) => (
   <Button
     className="bg-red bg-red-hover"
     onClick={onClick }
   >
-    {message}
+    {isLoading
+      ? <Spinner size="sm" />
+      : message
+    }
   </Button>
 );
 

@@ -73,12 +73,14 @@ class YoutubeStore {
       .catch(this.handleYoutubeAPIerror);
   }
   public requestComments(id: string) {
+    this.isLoading = true;
     this.nextComments.id = id;
     (gapi.client as any).youtube.commentThreads.list(commentOptions(id))
       .then(this.handleCommentsResponse)
       .catch(this.handleYoutubeAPIerror);
   }
   public requestCommentsNext() {
+    this.isLoading = true;
     (gapi.client as any).youtube.commentThreads.list(commentNextOptions(this.nextComments))
       .then((response: any) => this.handleCommentsResponse(response, true))
       .catch(this.handleYoutubeAPIerror);
@@ -112,6 +114,7 @@ class YoutubeStore {
     };
   }
   private handleCommentsResponse = (response: any, next: boolean = false) => {
+    this.isLoading = false;
     const body = JSON.parse(response.body);
     this.nextComments.token = body.nextPageToken;
     const newComments = body.items.map((item: any) => ({
