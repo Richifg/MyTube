@@ -56,6 +56,5 @@ No API key provided!!
       template: './src/index.html',
     }),
     new MiniCssExtractplugin(),
-    new webpack.DefinePlugin(definePluginOptions),
   ],
 };}
