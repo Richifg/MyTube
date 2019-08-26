@@ -34,12 +34,14 @@ class YoutubeStore {
   @persist('list') @observable public searchVideos: IVideoSnippet[];
   @observable public videoComments: IComment[];
   @observable public videoInfo: IVideoInfo;
+  @observable public isLoading: boolean;
   private nextSearch: { query: string, token: string };
   private nextComments: { id: string, token: string };
 
   constructor() {
     this.searchVideos = [];
     this.videoComments = [];
+    this.isLoading = false;
     this.videoInfo = {
       title: '', description: '', likes: '0', dislikes: '0', views: '0', comments: '0',
     };
@@ -51,6 +53,7 @@ class YoutubeStore {
   public search(query: string) {
     this.nextSearch.query = query;
     if (query) {
+      this.isLoading = true;
       (gapi.client as any).youtube.search.list(searchOptions(query))
         .then(this.handleSearchResponse)
         .catch(this.handleYoutubeAPIerror);
@@ -59,6 +62,7 @@ class YoutubeStore {
       }
   }
   public searchNext() {
+    this.isLoading = true;
     (gapi.client as any).youtube.search.list(searchNextOptions(this.nextSearch))
       .then((response: any) => this.handleSearchResponse(response, true))
       .catch(this.handleYoutubeAPIerror);
@@ -81,6 +85,7 @@ class YoutubeStore {
   }
 
   private handleSearchResponse = (response: any, next: boolean = false) => {
+    this.isLoading = false;
     const body = JSON.parse(response.body);
     this.nextSearch.token = body.nextPageToken;
     const newVideos = body.items.map((item: any) => ({

@@ -7,6 +7,7 @@ import {
   InputGroupAddon,
   Input,
   Button,
+  Spinner,
 } from 'reactstrap';
 
 import { debounce } from '../../utils';
@@ -35,7 +36,10 @@ class SearchBar extends React.Component<IYoutube> {
         <Input placeholder="Search" onChange={this.updateQuery} value={this.query}/>
         <InputGroupAddon addonType="append">
             <Button onClick={() => this.props.youtube.search(this.query)}>
-              <FontAwesomeIcon icon="search" />
+              {this.props.youtube.isLoading
+                ? <Spinner size="sm" />
+                : <FontAwesomeIcon icon="search" />
+              }
             </Button>
         </InputGroupAddon>
       </InputGroup>
