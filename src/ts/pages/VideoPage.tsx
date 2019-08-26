@@ -20,7 +20,7 @@ const VideoPage = ({ match }: IVideoPage) => {
     <React.Fragment>
       <PageHeader />
       <PageMain>
-        <Container fluid className="px-0 mb-5">
+        <Container fluid className="px-0 mb-3">
           <Row className="justify-content-center bg-black mx-0 mb-3">
             <VideoPlayer videoId={id} />
           </Row>

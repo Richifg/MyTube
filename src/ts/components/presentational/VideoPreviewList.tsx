@@ -8,10 +8,10 @@ interface IVideoList {
   videos: IVideoSnippet[];
 }
 const VideoPreviewList = ({ videos }: IVideoList) => (
-  <Row className="justify-content-center">
+  <Row>
     {
       videos.map(video => (
-        <Col xs={12} key={video.id}>
+        <Col xs={12} key={video.id} className="p-0">
           <VideoPreviewCard video={video} />
         </Col>
       ))

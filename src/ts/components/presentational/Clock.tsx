@@ -18,7 +18,7 @@ class Clock extends React.Component<IClockProps> {
   render() {
     const { store, sm, md } = this.props;
     return (
-      <span className={`mx-2 ${md ? 'hidden-md-down' : null} ${sm ? 'hidden-md-up' : null}`}>
+      <span className={`header-clock mx-2 ${md ? 'hidden-md-down' : null} ${sm ? 'hidden-md-up' : null}`}>
         {store.getTime12hFormat}
       </span>
     );

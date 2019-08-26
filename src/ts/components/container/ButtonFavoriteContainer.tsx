@@ -26,7 +26,7 @@ const ButtonFavoriteContainer = inject('youtube', 'favorites')
       onClick={(e: any) => {
         favorites.toggleFavorite(videoSnippet);
         // to avoid triggering the click event of the preview card
-        e.preventDefault();
+        e.stopPropagation() ;
       }}
     />
   );

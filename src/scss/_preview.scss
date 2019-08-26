@@ -1,3 +1,17 @@
+.preview-container {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.preview-card {
+  cursor: pointer;
+  transition: border-color 0.3s;
+  &:hover {
+    border-color: $text-color-primary;
+  }
+}
+
 @include media-breakpoint-up(sm) {
   .preview-card {
     flex-direction: row;
@@ -9,23 +23,13 @@
   }  
 }
 
-.preview-img {
-  cursor: pointer;
-}
-
-a:hover, a:focus {
-  & .card-title .preview-title, & .preview-description{
-    text-decoration: none;
-    // weird trick to avoid anchor children from underlining
-    display: inline-block;
-  }
-}
-
 .preview-title {
   color: $text-color-primary;
   font-size: $preview-title-font-size;
-  font-weight: bold;
-  word-break: break-all;
+  font-weight: bold; 
+  word-break: break-word;
+  margin: 0;
+  transition: text-decoration 1s;
 }
 
 .preview-description {

@@ -19,7 +19,7 @@ const MainPage = inject('youtube')(observer(({ youtube }: IYoutube) => (
         </Row>
         <VideoPreviewList videos={youtube.searchVideos}/>
         { !!youtube.searchVideos.length && (
-          <Row className="justify-content-center my-4">
+          <Row className="justify-content-center mb-3 mx-0">
             <LoadMoreButton  message="show more..." onClick={() => youtube.searchNext()}/>
           </Row>
         )}

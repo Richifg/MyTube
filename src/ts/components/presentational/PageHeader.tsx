@@ -44,7 +44,7 @@ class PageHeader extends React.Component {
           <Clock store={this.clockStore} sm />
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.isOpen} navbar>
-            <Nav navbar>
+            <Nav navbar className="header-link">
               <NavItem>
                 <NavLink href="#/">Search</NavLink>
               </NavItem>
