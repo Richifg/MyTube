@@ -1,5 +1,5 @@
-.preview-container {
-  width: fit-content;
+.preview-list-container {
+  max-width: $preview-card-max-width;
   margin-left: auto;
   margin-right: auto;
 }
@@ -15,7 +15,6 @@
 @include media-breakpoint-up(sm) {
   .preview-card {
     flex-direction: row;
-    max-width: $preview-card-max-width;
   }
   .preview-img {
     max-width: $preview-img-max-width;

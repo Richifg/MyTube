@@ -8,7 +8,7 @@ interface IVideoList {
   videos: IVideoSnippet[];
 }
 const VideoPreviewList = ({ videos }: IVideoList) => (
-  <Row>
+  <Row className="preview-list-container">
     {
       videos.map(video => (
         <Col xs={12} key={video.id} className="p-0">
