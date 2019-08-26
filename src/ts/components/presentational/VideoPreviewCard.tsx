@@ -8,6 +8,7 @@ import ButtonFavoriteContainer from '../container/ButtonFavoriteContainer';
 
 interface IVideoCard  { video: IVideoSnippet; }
 
+// Using bootstrap cards just to meet the project requirements
 const VideoPreviewCard = ({ video }: IVideoCard) => {
   const { img , title, description, id } = video;
   return (

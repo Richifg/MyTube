@@ -17,6 +17,12 @@ class Clock extends React.Component<IClockProps> {
 
   render() {
     const { store, sm, md } = this.props;
+    /*
+      to make it seems as though the clock is always on the top right position of the
+      navbar, two clocks (one hidden when the other is visible) had to be inserted at
+      different parts of the layout because of the way bootrap collapsable navbar works
+    */
+
     return (
       <span className={`header-clock mx-2 ${md ? 'hidden-md-down' : null} ${sm ? 'hidden-md-up' : null}`}>
         {store.getTime12hFormat}

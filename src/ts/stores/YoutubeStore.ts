@@ -49,7 +49,7 @@ class YoutubeStore {
     this.nextComments = { id: '', token: '' };
   }
 
-  // invocable actions
+  // public invocable actions
   public search(query: string) {
     this.nextSearch.query = query;
     if (query) {
@@ -86,6 +86,7 @@ class YoutubeStore {
       .catch(this.handleYoutubeAPIerror);
   }
 
+  // private handlers for api reponses
   private handleSearchResponse = (response: any, next: boolean = false) => {
     this.isLoading = false;
     const body = JSON.parse(response.body);

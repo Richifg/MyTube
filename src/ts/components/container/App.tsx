@@ -33,6 +33,7 @@ class App extends React.Component<IApp> {
     this.apiState = 'loading';
     this.apiError = null;
     const hydrate = create({ debounce: 1000 });
+    // load stores with persisted data (favorites and last search)
     this.youtubeStore = new YoutubeStore();
     this.favoritesStore = new FavoritesStore();
     hydrate('youtube', this.youtubeStore);
@@ -54,7 +55,7 @@ class App extends React.Component<IApp> {
     }
     gapi.client.setApiKey(this.props.apikey);
     // typescript is not recognizing the catch method of the returned promise like object
-    // so had to wrap gapi as any
+    // gapi is wrapped as "any" here just to avoid compile errors
     (gapi.client.load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest', 'v3') as any)
       .then(() => { this.apiState = 'ready'; })
       .catch((error: any) => {

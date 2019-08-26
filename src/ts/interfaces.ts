@@ -1,7 +1,7 @@
 import YoutubeStore from './stores/YoutubeStore';
 import FavoritesStore from './stores/FavoritesStore';
 
-// interfaces store injection
+// interfaces for store injection
 export interface IYoutube {
   youtube?: YoutubeStore;
 }
@@ -19,7 +19,8 @@ export interface IVideoInfo {
   comments: string;
 }
 
-// videos snippet shape used for previews (this one has truncated description)
+// video snippet shape used for previews
+// (this one has truncated description and is the only data that is persisted)
 export interface IVideoSnippet {
   title: string;
   description: string;

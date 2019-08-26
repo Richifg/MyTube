@@ -17,6 +17,7 @@ interface IFavoriteButton extends IYoutube, IFavorites {
 const ButtonFavoriteContainer = inject('youtube', 'favorites')
 (observer(({ id, youtube, favorites }: IFavoriteButton) => {
   const active = favorites.isVideoFavorite(id);
+  // searching on favorites first if possible because it will presumably have less items
   const videoSnippet = active
     ? favorites.videos.find(video => video.id === id)
     : youtube.searchVideos.find(video => video.id === id);
