@@ -1,7 +1,9 @@
 {
   "name": "MyTube",
   "version": 2,
-  "env": {
-    "APIKEY": "@api-key"
+  "build": {
+    "env": {
+      "APIKEY": "@api-key"
+    }
   }
 }
