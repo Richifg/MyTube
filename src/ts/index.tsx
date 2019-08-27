@@ -4,11 +4,12 @@ import App from './components/container/App';
 import '../scss/styles.scss';
 import './icon-library';
 
-const apikey = process.env.APIKEY;
-console.log('Yes, this is the latest build...123');
-console.log(apikey);
-console.log(process.env.APIKEY);
-console.log(process.env.TEST);
-console.log(process.env.MY_VARIABLE);
-console.log(process.env.NODE_ENV);
+/*
+  gapi doesn't fail when providing an empty key because it allows very limited
+  withouth signing in. So if no APIKEY was provided, set it to dummy to
+  force gapi to fail on load and let the app handle the error.
+*/
+
+const apikey = process.env.APIKEY || 'dummy-key';
+
 render(<App apikey={apikey}/>, document.getElementById('anchor'));

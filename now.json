@@ -3,14 +3,7 @@
   "version": 2,
   "build": {
     "env": {
-      "APIKEY": "@api-key",
-      "TEST": "@test",
-      "MY_VARIABLE": "@acme-api-key"
+      "APIKEY": "@api-key"
     }
-  },
-  "env": {
-    "APIKEY": "@api-key",
-    "TEST": "@test",
-    "MY_VARIABLE": "@acme-api-key"
   }
 }
