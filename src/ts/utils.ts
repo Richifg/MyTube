@@ -73,15 +73,36 @@ export function pointFormat(num: number) {
 }
 
 /*
-  Return a string where the HTML reserverd characters are replaced by their corresponding symbol
+  Returns a string where the HTML reserverd characters are replaced by their corresponding symbol
 */
 
 export function replaceReserverdChars(str: string) {
   const newStr = str
-    .replace('&quot;', '"')
-    .replace('&apos;', '\'')
-    .replace('&amp;', '&')
-    .replace('&lt;', '<')
-    .replace('&gt;', '>');
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, '\'')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
   return newStr;
+}
+ /*
+  Receives a string in an ISO 8601 duration format, and returns it in a format similar to
+  to the one used by youtube on their duration preview labels
+    PT1H5M34S -> 1:05:34
+*/
+
+export function durationFormat(str: string) {
+  // remove unwanted characters
+  const cleanStr = str
+    .replace(/[(PT)S]/g, '')
+    .replace(/[HM]/g, ':');
+  // add zeros to minutes and seconds if needed
+  const strArr = cleanStr.split(':');
+  if (strArr[1]) {
+    if (strArr[1].length === 1) { strArr[1] = `0${strArr[1]}`; }
+  }
+  if (strArr[2]) {
+    if (strArr[2].length === 1) { strArr[2] = `0${strArr[2]}`; }
+  }
+  return strArr.join(':');
 }

@@ -1,7 +1,13 @@
 import { observable } from 'mobx';
 import { persist } from 'mobx-persist';
 import { IVideoSnippet, IVideoInfo, IComment } from '../interfaces';
-import { elipsis, shortFormat, pointFormat, replaceReserverdChars } from '../utils';
+import {
+  elipsis,
+  shortFormat,
+  pointFormat,
+  replaceReserverdChars,
+  durationFormat,
+} from '../utils';
 
 // youtube data api request options
 const searchOptions = (query: string) => ({
@@ -14,6 +20,12 @@ const searchOptions = (query: string) => ({
 const searchNextOptions = ({query, token}: {query: string, token: string }) => (
   Object.assign({}, searchOptions(query), { pageToken: token })
 );
+const durationOptions = (id: string) => ({
+  part: 'contentDetails',
+  fields: 'items(contentDetails(duration))',
+  id,
+});
+
 const statsOptions = (id: string) => ({
   part: 'statistics,snippet',
   fields: 'items(statistics(viewCount,likeCount,dislikeCount,commentCount),snippet(title,description))',
@@ -88,9 +100,12 @@ class YoutubeStore {
 
   // private handlers for api reponses
   private handleSearchResponse = (response: any, next: boolean = false) => {
-    this.isLoading = false;
     const body = JSON.parse(response.body);
     this.nextSearch.token = body.nextPageToken;
+    if (!body.items.length) {
+      this.searchVideos = [];
+      this.isLoading = false;
+      return; }
     const newVideos = body.items.map((item: any) => ({
       /*
         unlike the comment resource, the search resource doens't accept format type
@@ -101,11 +116,25 @@ class YoutubeStore {
       img: item.snippet.thumbnails.medium.url,
       id: item.id.videoId,
     }));
-    if (next) {
-      this.searchVideos.push(...newVideos);
-    } else {
-      this.searchVideos = newVideos;
-    }
+    /*
+      video duration which is required for video previews, is only accessible from a different
+      resource, so another api call is required to retreive it...
+    */
+    const ids = newVideos.map((video: any) => video.id).join(',');
+    (gapi.client as any).youtube.videos.list(durationOptions(ids))
+      .then((resp: any) => {
+        this.isLoading = false;
+        const items = JSON.parse(resp.body).items;
+        newVideos.forEach((video: any, index: number) => {
+          video.duration = durationFormat(items[index].contentDetails.duration);
+        });
+        if (next) {
+          this.searchVideos.push(...newVideos);
+        } else {
+          this.searchVideos = newVideos;
+        }
+      })
+      .catch(this.handleYoutubeAPIerror);
   }
   private handleVideosResponse = (response: any) => {
     const info = JSON.parse(response.body).items[0];

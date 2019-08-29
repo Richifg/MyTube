@@ -29,6 +29,7 @@ export interface IVideoSnippet {
   title: string;
   description: string;
   img: string;
+  duration: string;
   id?: string;
 }
 
