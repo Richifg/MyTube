@@ -20,7 +20,10 @@ const VideoPreviewCard = inject('wHistory')(({ video, wHistory }: IVideoCard) =>
     }
       }>
       <Card color="dark" className="preview-card mb-2 mx-auto">
-        <CardImg src={img} className="preview-img" alt="video thumbnail" />
+        <div className="preview-img-container">
+          <img src={img} className="preview-img" alt="video thumbnail"/>
+          <span className="preview-duration">{video.duration}</span>
+        </div>
         <CardBody className="p-1 p-sm-3">
           <CardTitle className="d-flex">
             <p className="preview-title">{title}</p>
