@@ -1,0 +1,17 @@
+.intro-title {
+  font-size: $intro-title-font-size;
+  display: inline;
+  letter-spacing: -.2rem;
+}
+
+.intro-icon {
+  font-size: $intro-title-font-size;
+  color: red;
+}
+
+.intro-spinner {
+  color: red;
+  width: $intro-spinner-size;
+  height: $intro-spinner-size;
+  border-width: $intro-spinner-width;
+}

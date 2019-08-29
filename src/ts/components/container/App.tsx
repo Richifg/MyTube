@@ -16,7 +16,8 @@ import YoutubeStore from '../../stores/YoutubeStore';
 import FavoritesStore from '../../stores/FavoritesStore';
 import HistoryStore from '../../stores/HistoryStore';
 
-import LoadingSpinner from '../presentational/LoadingSpinner';
+// comps
+import LoadingIntro from '../presentational/LoadingIntro';
 import ErrorMessage from '../presentational/ErrorMessage';
 
 interface IApp {
@@ -91,10 +92,10 @@ class App extends React.Component<IApp> {
         </Provider>
       );
       case 'loading': return (
-        <LoadingSpinner message={'Loading Google API'}/>
+        <LoadingIntro />
       );
       case 'error': return (
-        <ErrorMessage message={this.apiError}/>
+        <ErrorMessage message={this.apiError} />
       );
     }
   }
