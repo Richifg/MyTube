@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { persist } from 'mobx-persist';
 import { IVideoSnippet, IVideoInfo, IComment } from '../interfaces';
-import { elipsis, shortFormat, pointFormat } from '../utils';
+import { elipsis, shortFormat, pointFormat, replaceReserverdChars } from '../utils';
 
 // youtube data api request options
 const searchOptions = (query: string) => ({
@@ -92,8 +92,12 @@ class YoutubeStore {
     const body = JSON.parse(response.body);
     this.nextSearch.token = body.nextPageToken;
     const newVideos = body.items.map((item: any) => ({
-      title: item.snippet.title,
-      description: elipsis(item.snippet.description, 125),
+      /*
+        unlike the comment resource, the search resource doens't accept format type
+        so returned strings are in html format and need to be treated for reserved characters
+      */
+      title: replaceReserverdChars(item.snippet.title),
+      description: elipsis(replaceReserverdChars(item.snippet.description), 125),
       img: item.snippet.thumbnails.medium.url,
       id: item.id.videoId,
     }));
@@ -106,7 +110,7 @@ class YoutubeStore {
   private handleVideosResponse = (response: any) => {
     const info = JSON.parse(response.body).items[0];
     this.videoInfo = {
-      title: info.snippet.title.replace(),
+      title: info.snippet.title,
       description: info.snippet.description,
       likes: shortFormat(info.statistics.likeCount),
       dislikes: shortFormat(info.statistics.dislikeCount),

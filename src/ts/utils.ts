@@ -57,7 +57,6 @@ export function shortFormat(num: string) {
 /*
   Returns a string with points in each thousandth of 12.456.789
 */
-
 export function pointFormat(num: number) {
   const numStr = String(num);
   let result = numStr;
@@ -71,4 +70,18 @@ export function pointFormat(num: number) {
     }
   }
   return result;
+}
+
+/*
+  Return a string where the HTML reserverd characters are replaced by their corresponding symbol
+*/
+
+export function replaceReserverdChars(str: string) {
+  const newStr = str
+    .replace('&quot;', '"')
+    .replace('&apos;', '\'')
+    .replace('&amp;', '&')
+    .replace('&lt;', '<')
+    .replace('&gt;', '>');
+  return newStr;
 }
