@@ -12,7 +12,7 @@ const CommentCard = ({ comment }: ICommentCard) => (
     <Col xs={2} sm={1} className="pl-0">
       <img className="comment-img" src={comment.userImg} alt="user profile picture"/>
     </Col>
-    <Col xs={10} sm={11} className="pr-0">
+    <Col xs={10} sm={11} className="px-0">
       <p className="comment-user">{comment.userName}</p>
       <pre className="comment-text">{comment.text}</pre>
     </Col>
