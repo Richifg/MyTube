@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-import PageHeader from '../components/presentational/PageHeader';
+import PageHeader from '../components/container/PageHeader';
 
 // in case an user manually write an invalid page in the browers
 

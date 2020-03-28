@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { inject, observer } from 'mobx-react';
 
-import PageHeader from '../components/presentational/PageHeader';
+import PageHeader from '../components/container/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import VideoPreviewList from '../components/presentational/VideoPreviewList';
 import ButtonAddFavorite from '../components/presentational/ButtonFavorite';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-import PageHeader from '../components/presentational/PageHeader';
+import PageHeader from '../components/container/PageHeader';
 import PageMain from '../components/presentational/PageMain';
 import VideoPlayer from '../components/presentational/VideoPlayer';
 import VideoTitle from '../components/presentational/VideoTitle';
