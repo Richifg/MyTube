@@ -35,7 +35,6 @@ class App extends React.Component<IApp> {
   constructor(props: any) {
     super(props);
     this.apiState = 'loading';
-    this.apiError = null;
     const hydrate = create({ debounce: 1000 });
     // load stores with persisted data (favorites and last search)
     this.youtubeStore = new YoutubeStore();
@@ -67,18 +66,21 @@ class App extends React.Component<IApp> {
       .catch((error: any) => {
         const e = error.error.errors[0];
         this.apiError = `${e.message}, reason: ${e.reason}`;
-        this.apiState = 'error';
       });
   }
 
   render() {
-    switch (this.apiState) {
+    const { apiState, apiError, youtubeStore, favoritesStore, historyStore } = this;
+    if (youtubeStore.error) {
+      return <ErrorMessage message={youtubeStore.error} />;
+    }
+    switch (apiState) {
       // history is reserved on provider for page history so using wHistory instead (watch History)
       case 'ready': return (
         <Provider
-          youtube={this.youtubeStore}
-          favorites={this.favoritesStore}
-          wHistory={this.historyStore}
+          youtube={youtubeStore}
+          favorites={favoritesStore}
+          wHistory={historyStore}
         >
           <Router>
             <Switch>
@@ -95,7 +97,7 @@ class App extends React.Component<IApp> {
         <LoadingIntro />
       );
       case 'error': return (
-        <ErrorMessage message={this.apiError} />
+        <ErrorMessage message={apiError} />
       );
     }
   }

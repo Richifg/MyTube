@@ -5,10 +5,10 @@ interface IError {
 }
 
 // only shown when gapi fails load due to bad api key
-// or any other unkown reasons
+// or a bad request/configuration on the api
 
 const ErrorMessage = ({ message }: IError) => (
-  <div className="m-auto text-center">
+  <div className="my-auto mx-5 text-center">
     <h3 className="text-danger">ERROR</h3>
     <h4>{message}</h4>
   </div>

@@ -47,6 +47,7 @@ class YoutubeStore {
   @observable public videoComments: IComment[];
   @observable public videoInfo: IVideoInfo;
   @observable public isLoading: boolean;
+  @observable public error: string;
   private nextSearch: { query: string, token: string };
   private nextComments: { id: string, token: string };
 
@@ -59,6 +60,7 @@ class YoutubeStore {
     };
     this.nextSearch = { query: '', token: '' };
     this.nextComments = { id: '', token: '' };
+    this.error = '';
   }
 
   // public invocable actions
@@ -166,7 +168,7 @@ class YoutubeStore {
   private handleYoutubeAPIerror = (response: any) => {
     const errors = JSON.parse(response.body).error.errors
       .map((error: any) => error.message);
-    throw new Error(errors.toString());
+    this.error = errors.toString();
   }
 }
 
