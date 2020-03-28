@@ -1,9 +1,9 @@
 # MyTube
 
 A custom Youtube player where you can search for videos and watch them.
-Functionality for bookmarking videos and watch history is also implemented.
+Functionalities for bookmarking videos and watch history are also implemented.
 
-This project was built with ReactJS, styling is done mostly through Sass and Bootstrap and state management was implement with MobX.
+This project was built with ReactJS, styling is done mostly through Sass and Bootstrap; and state management was implement with MobX.
 
 The project heavily relies on Google's YouTube Data API and manually injected Youtube iframes.
 
