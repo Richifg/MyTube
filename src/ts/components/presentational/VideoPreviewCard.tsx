@@ -19,7 +19,7 @@ const VideoPreviewCard = inject('wHistory')(({ video, wHistory }: IVideoCard) =>
       (window.location as any) = `#/video/${video.id}`;
     }
       }>
-      <Card color="dark" className="preview-card mb-2 mx-auto">
+      <Card color="dark" className="preview-card mb-2 mx-auto slide-up">
         <div className="preview-img-container">
           <img src={img} className="preview-img" alt="video thumbnail"/>
           <span className="preview-duration">{video.duration}</span>

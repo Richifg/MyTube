@@ -8,7 +8,7 @@ interface ICommentCard {
 }
 
 const CommentCard = ({ comment }: ICommentCard) => (
-  <Row className="mx-0 mb-2">
+  <Row className="mx-0 mb-2 slide-up">
     <Col xs={2} sm={1} className="pl-0">
       <img className="comment-img" src={comment.userImg} alt="user profile picture"/>
     </Col>
